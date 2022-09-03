@@ -4,7 +4,7 @@ RSpec.describe "Users", type: :request do
 
   describe 'POST /signup' do
     context 'with matching password confirmation' do
-      let!(:user_params) { { username: 'Steven', password: 'un1verse', password_confirmation: 'un1verse' } }
+      let!(:user_params) { { name: 'Steven', password: 'un1verse', password_confirmation: 'un1verse' } }
 
       it 'creates a new user' do
         expect { post '/signup', params: user_params }.to change(User, :count).by(1)
@@ -34,7 +34,7 @@ RSpec.describe "Users", type: :request do
     end
 
     context 'with no matching password confirmation' do
-      let!(:user_params) { { username: 'Steven', password: 'un1verse', password_confirmation: 'wrong' } }
+      let!(:user_params) { { name: 'Steven', password: 'un1verse', password_confirmation: 'wrong' } }
 
       it 'does not save the user' do
         expect { post '/signup' }.not_to change(User, :count)
